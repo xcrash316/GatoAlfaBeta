@@ -259,12 +259,12 @@ public class Gato {
     public static void calcularUtl(){
         Arrays.fill(utl, 0);
         if (turnos==0) {
-            gato[2][2]="X";   
+            gato[0][0]="X";   
             turno=1;
            
            // turnos++;
         }else {
-            for (int p = 1; p < 9; p++) {
+            for (int p = 1; p <= 9; p++) {
                 //////
                 if(p==1){
                 if (gato[0][0]=="X" || gato[0][0]=="O") {
@@ -332,6 +332,10 @@ public class Gato {
             }
             int maxValue = Arrays.stream(utl).max().getAsInt();
             int minValue = Arrays.stream(utl).min().getAsInt();
+            System.out.println(utl);
+            System.out.println(maxValue);
+            System.out.println(minValue);
+            
             if(turno==0){
             if (minValue< -8) {
                 for (int i = 0; i < utl.length; i++) {
@@ -374,12 +378,15 @@ public class Gato {
             }
             }
         }
+        
     }
     
     public static void calc(int pos){
+        
         int x=0;
         int y=0;
-        int utilidad;  
+        int utilidad;
+        if(turno==0){
             if(pos==1){
                 gato[0][0]="X";
             }
@@ -407,8 +414,37 @@ public class Gato {
             if(pos==9){
                 gato[2][2]="X";
             }
+        }else{
+            if(pos==1){
+                gato[0][0]="O";
+            }
+            if(pos==2){
+                gato[0][1]="O";
+            }
+            if(pos==3){
+                gato[0][2]="O";
+            }
+            if(pos==4){
+                gato[1][0]="O";
+            }
+            if(pos==5){
+                gato[1][1]="O";
+            }
+            if(pos==6){
+                gato[1][2]="O";
+            }
+            if(pos==7){
+                gato[2][0]="O";
+            }
+            if(pos==8){
+                gato[2][1]="O";
+            }
+            if(pos==9){
+                gato[2][2]="O";
+            }
+        }
         for (int i = 0; i < 3; i++) {
-                if(gato[0][i]!="X" && gato[1][i]!="X" && gato[2][i]!="X" ){
+            /*    if(gato[0][i]!="X" && gato[1][i]!="X" && gato[2][i]!="X" ){
                     y++;
                 }
                 if(gato[i][0]!="X" && gato[i][1]!="X" && gato[i][2]!="X" ){
@@ -455,8 +491,62 @@ public class Gato {
                 }
                 if(gato[0][2]=="O" && gato[1][1]=="O" && gato[2][0]=="O" ){
                     y=100;
+                }*/
+            
+            if(gato[0][i]!="X" && gato[1][i]!="X" && gato[2][i]!="X" ){
+                    y++;
                 }
+                if(gato[i][0]!="X" && gato[i][1]!="X" && gato[i][2]!="X" ){
+                    y++;
+                }
+                
+                if(gato[0][i]!="O" && gato[1][i]!="O" && gato[2][i]!="O" ){
+                    x++;
+                }
+                if(gato[i][0]!="O" && gato[i][1]!="O" && gato[i][2]!="O" ){
+                    x++;
+                }
+                
+                if(gato[0][i]=="X" && gato[1][i]=="X" && gato[2][i]=="X" ){
+                    x=100;
+                }
+                if(gato[i][0]=="X" && gato[i][1]=="X" && gato[i][2]=="X" ){
+                    x=100;
+                }
+                
+                if(gato[0][i]=="O" && gato[1][i]=="O" && gato[2][i]=="O" ){
+                    y=100;
+                }
+                if(gato[i][0]=="O" && gato[i][1]=="O" && gato[i][2]=="O" ){
+                    y=100;
+                }
+                
         }
+        if(gato[0][0]!="X" && gato[1][1]!="X" && gato[2][2]!="X" ){
+                    y++;
+                }
+                if(gato[0][2]!="X" && gato[1][1]!="X" && gato[2][0]!="X" ){
+                    y++;
+                }
+                if(gato[0][0]!="O" && gato[1][1]!="O" && gato[2][2]!="O" ){
+                    x++;
+                }
+                if(gato[0][2]!="O" && gato[1][1]!="O" && gato[2][0]!="O" ){
+                    x++;
+                }
+                if(gato[0][0]=="X" && gato[1][1]=="X" && gato[2][2]=="X" ){
+                    x=100;
+                }
+                if(gato[0][2]=="X" && gato[1][1]=="X" && gato[2][0]=="X" ){
+                    x=100;
+                }
+                if(gato[0][0]=="O" && gato[1][1]=="O" && gato[2][2]=="O" ){
+                    y=100;
+                }
+                if(gato[0][2]=="O" && gato[1][1]=="O" && gato[2][0]=="O" ){
+                    y=100;
+                }
+                
             utilidad=x-y;
             utl[pos-1]=utilidad;
             if(pos==1){
